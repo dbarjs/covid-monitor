@@ -88,6 +88,7 @@ export default {
       rightDrawer: false,
       title: 'Vuetify.js'
     }
-  }
+  },
+  middleware: 'data-fetch'
 }
 </script>
