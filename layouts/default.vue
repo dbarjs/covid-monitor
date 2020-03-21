@@ -35,7 +35,7 @@
       </v-container>
     </v-content>
     <v-footer app absolute>
-      <span>Eduardo Barros &copy; {{ new Date().getFullYear() }}</span>
+      <span>@dbarjs &copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
   </v-app>
 </template>
