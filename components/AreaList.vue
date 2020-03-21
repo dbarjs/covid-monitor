@@ -3,7 +3,7 @@
     <area-list-item
       v-for="(area, index) in areas"
       :key="index"
-      :areaData="area"
+      :area-data="area"
     ></area-list-item>
   </div>
 </template>
