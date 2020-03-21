@@ -19,8 +19,15 @@ export const getters = {
 
 export const actions = {
   fetchData: (context, url) => {
-    axios.get(url).then((result) => {
-      context.commit('setData', result.data)
-    })
+    const corsAnywhereURL = 'https://cors-anywhere.herokuapp.com/'
+    axios
+      .get(corsAnywhereURL + url, {
+        headers: {
+          'Access-Control-Allow-Origin': '*'
+        }
+      })
+      .then((result) => {
+        context.commit('setData', result.data)
+      })
   }
 }
