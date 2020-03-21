@@ -1,5 +1,3 @@
-import axios from 'axios'
-
 export const state = () => ({
   data: {
     areas: []
@@ -18,16 +16,18 @@ export const getters = {
 }
 
 export const actions = {
-  fetchData: (context, url) => {
-    const corsAnywhereURL = 'https://cors-anywhere.herokuapp.com/'
-    axios
-      .get(corsAnywhereURL + url, {
-        headers: {
-          'Access-Control-Allow-Origin': '*'
-        }
-      })
-      .then((result) => {
-        context.commit('setData', result.data)
-      })
+  async nuxtServerInit({ dispatch }) {
+    const apiURL =
+      'https://www.bing.com/covid/data?fbclid=IwAR0H3Pf41agrGI7BFRj-YpSujrSnpXt7VRQ-4geg9BtsxCZPZGCQDFD4X8Y&IG=5478213FEBF343D89A5F43FAC6815CCD'
+    await dispatch('fetchData', apiURL)
+  },
+  async fetchData({ commit }, url) {
+    // const corsAnywhereURL = 'https://cors-anywhere.herokuapp.com/'
+    const response = await this.$axios.get(url, {
+      headers: {
+        'Access-Control-Allow-Origin': '*'
+      }
+    })
+    commit('setData', response.data)
   }
 }
