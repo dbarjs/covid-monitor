@@ -1,6 +1,6 @@
-# covid-monitor
+# covidbr-monitor
 
-> COVID-19 Monitor
+> Covid-BR Monitor
 
 ## Build Setup
 
