@@ -1,24 +1,37 @@
 import { firestoreAction } from 'vuexfire'
-import { countriesRef } from '~/firebase'
+import { countriesRef, Timestamp } from '~/firebase'
 
-export const data = () => ({
-  countries: []
+export const state = () => ({
+  countries: {}
 })
 
-export const getters = {}
+export const getters = {
+  getCountries: (state) => state.countries || [],
+  getCountryById: (state, getters) => (countryId) =>
+    getters.getCountries.find((country) => country.countryId === countryId)
+}
 
 export const actions = {
   bindCountries: firestoreAction((context) => {
-    context.bindFirestoreRef('cities', countriesRef)
+    context.bindFirestoreRef('countries', countriesRef)
   }),
   updateCountries: (context) => {
-    Object.values(context.rootGetters.getCountries).forEach((country) => {
-      countriesRef
-        .doc(country.countryId)
-        .set(country, { merge: true })
-        .then(function() {
-          context.dispatch('config/updateStatus', countriesRef, { root: true })
-        })
-    })
+    Object.values(context.rootGetters['fetch/getCountries']).forEach(
+      (country) => {
+        try {
+          countriesRef
+            .doc(country.countryId)
+            .set({ ...country, updated: Timestamp.now() }, { merge: true })
+            .then(function() {
+              context.dispatch('config/updateStatus', countriesRef, {
+                root: true
+              })
+            })
+        } catch (e) {
+          // eslint-disable-next-line
+          console.error(e)
+        }
+      }
+    )
   }
 }
