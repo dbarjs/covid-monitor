@@ -8,7 +8,7 @@
         <country-resume :country="brazil"></country-resume>
       </v-container>
     </header>
-    <v-layout class="grey lighten-1">
+    <v-layout class="grey lighten-2">
       <v-container>
         <city-search></city-search>
         <selected-cities></selected-cities>
