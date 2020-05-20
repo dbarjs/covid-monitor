@@ -6,8 +6,8 @@ export default {
    ** Headers of the page
    */
   head: {
-    titleTemplate: '%s - ' + process.env.npm_package_name,
-    title: process.env.npm_package_name || '',
+    titleTemplate: 'CovidBR Monitor',
+    title: 'CovidBR Monitor',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -17,7 +17,14 @@ export default {
         content: process.env.npm_package_description || ''
       }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'stylesheet',
+        href:
+          'https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500;700&display=swap'
+      }
+    ]
   },
   /*
    ** Customize the progress-bar color
@@ -30,7 +37,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/vuefire'],
+  plugins: ['~/plugins/vuefire', '~/plugins/filters'],
   /*
    ** Nuxt.js dev-modules
    */
@@ -63,7 +70,7 @@ export default {
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
-      dark: true,
+      dark: false,
       themes: {
         dark: {
           primary: colors.blue.darken2,
@@ -75,7 +82,8 @@ export default {
           success: colors.green.accent3
         }
       }
-    }
+    },
+    treeShake: true
   },
   /*
    ** Build configuration
@@ -99,5 +107,8 @@ export default {
         ]
       }
     }
+  },
+  server: {
+    host: '0.0.0.0'
   }
 }
