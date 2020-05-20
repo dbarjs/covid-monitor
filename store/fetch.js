@@ -97,13 +97,21 @@ export const getters = {
             lastDate: state.lastDate
           }
         }
-        countries[countryId].deaths += entry.newDeaths
         countries[countryId].totalCases += entry.newCases
+        countries[countryId].deaths += entry.newDeaths
         if (!countries[countryId].history[date]) {
-          countries[countryId].history[date] = { deaths: 0, totalCases: 0 }
+          countries[countryId].history[date] = {
+            newCases: 0,
+            newDeaths: 0,
+            deaths: 0,
+            totalCases: 0
+          }
         }
-        countries[countryId].history[date].deaths += entry.newDeaths
-        countries[countryId].history[date].totalCases += entry.newCases
+        countries[countryId].history[date].newCases += entry.newCases
+        countries[countryId].history[date].newDeaths += entry.newDeaths
+        countries[countryId].history[date].deaths = countries[countryId].deaths
+        countries[countryId].history[date].totalCases =
+          countries[countryId].totalCases
         if (entry.date === countries[countryId].lastDate) {
           countries[countryId].newCases += entry.newCases
           countries[countryId].newDeaths += entry.newDeaths
