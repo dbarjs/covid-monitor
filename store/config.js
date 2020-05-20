@@ -27,7 +27,7 @@ export const actions = {
         .doc('status')
         .set(
           {
-            lastDate: context.rootGetters.getLastDateInEntries,
+            lastDate: context.rootGetters['fetch/getLastDateInEntries'],
             updated: Timestamp.now()
           },
           { merge: true }
