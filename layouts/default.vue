@@ -1,40 +1,26 @@
 <template>
-  <v-app dark>
-    <v-navigation-drawer
-      v-model="drawer"
-      :mini-variant="miniVariant"
-      :clipped="clipped"
-      fixed
-      app
-    >
-      <v-list>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          router
-          exact
-        >
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    <v-app-bar :clipped-left="clipped" fixed app>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title v-text="title" />
-    </v-app-bar>
+  <v-app>
     <v-content>
-      <v-container>
+      <v-container class="py-0">
         <nuxt />
       </v-container>
     </v-content>
-    <v-footer :fixed="fixed" app>
-      <span>&copy; {{ new Date().getFullYear() }}</span>
+    <v-footer
+      app
+      absolute
+      height="96"
+      color="transparent"
+      class="d-flex align-center align-content-center justify-center"
+    >
+      <v-btn
+        icon
+        color="black"
+        x-large
+        href="https://github.com/dbarjs/covid-monitor"
+        target="_blank"
+      >
+        <v-icon>mdi-github</v-icon>
+      </v-btn>
     </v-footer>
   </v-app>
 </template>
@@ -43,7 +29,6 @@
 export default {
   data() {
     return {
-      clipped: false,
       drawer: false,
       fixed: false,
       items: [
@@ -67,3 +52,19 @@ export default {
   }
 }
 </script>
+
+<style>
+.v-application p.font-mono,
+.v-application span.font-mono {
+  font-family: 'Roboto Mono', monospace !important;
+  letter-spacing: -1px !important;
+}
+
+.v-application .font-mono.font-dense {
+  letter-spacing: -3px !important;
+}
+
+.v-application.theme--light {
+  background-color: #fafafa;
+}
+</style>
