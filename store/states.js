@@ -12,7 +12,7 @@ export const actions = {
     context.bindFirestoreRef('cities', statesRef)
   }),
   updateStates: (context) => {
-    const states = context.rootGetters.getStates
+    const states = context.rootGetters['fetch/getStates']
     const batch = database.batch()
     Object.values(states).map((state) => {
       const stateId = state.state
