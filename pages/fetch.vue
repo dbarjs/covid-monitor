@@ -36,16 +36,16 @@ export default {
       return this.$store.getters['config/getLastDate']
     },
     entries() {
-      return this.$store.getters.getEntries()
+      return this.$store.getters['fetch/getEntries']()
     },
     cities() {
-      return this.$store.getters.getCities(this.lastDate.cities)
+      return this.$store.getters['fetch/getCities'](this.lastDate.cities)
     },
     states() {
-      return this.$store.getters.getStates
+      return this.$store.getters['fetch/getStates']
     },
     countries() {
-      return this.$store.getters.getCountries
+      return this.$store.getters['fetch/getCountries']
     },
     totalCases() {
       return Object.values(this.entries).reduce(
@@ -57,7 +57,7 @@ export default {
   },
   methods: {
     fetch() {
-      this.$store.dispatch('fetchData')
+      this.$store.dispatch('fetch/fetchData')
     },
     updateCities() {
       this.$store.dispatch('cities/updateCities')
