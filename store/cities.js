@@ -16,14 +16,14 @@ export const mutations = {
     if (!state.selectedCities.find((id) => id === cityId)) {
       state.selectedCities.push(cityId)
       store('selectedCities', state.selectedCities)
-      return true
     }
     return false
   },
   REMOVE_SELECTED_CITY: (state, cityId) => {
     const index = state.selectedCities.findIndex((id) => id === cityId)
-    if (index) {
+    if (index > -1) {
       state.selectedCities.splice(index, 1)
+      store('selectedCities', state.selectedCities)
     }
   }
 }
