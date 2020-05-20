@@ -13,7 +13,9 @@ export const actions = {
   }),
   updateCities: (context, all = false) => {
     const lastDate = context.rootGetters['config/getLastDate'].cities
-    const cities = context.rootGetters.getCities(all ? false : lastDate)
+    const cities = context.rootGetters['fetch/getCities'](
+      all ? false : lastDate
+    )
     const cityList = Object.keys(cities)
     let counter = 0
     function update(currentIndex = 0, limit = 500) {
