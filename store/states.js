@@ -1,15 +1,29 @@
 import { firestoreAction } from 'vuexfire'
 import { statesRef, database } from '~/firebase'
 
-export const data = () => ({
-  cities: []
+export const state = () => ({
+  states: []
 })
 
-export const getters = {}
+export const getters = {
+  getStates: (state) => (state.states.length ? [...state.states] : []),
+  getCities: (state, getters) =>
+    getters.getStates.reduce((list, { state, cities }) => {
+      Object.keys(cities).map((cityId) =>
+        list.push({
+          cityId,
+          state,
+          name: cities[cityId].city
+        })
+      )
+      return list
+    }, []),
+  getCityNames: (state, getters) => getters.getCities.map(({ city }) => city)
+}
 
 export const actions = {
   bindStates: firestoreAction((context) => {
-    context.bindFirestoreRef('cities', statesRef)
+    context.bindFirestoreRef('states', statesRef.orderBy('totalCases', 'desc'))
   }),
   updateStates: (context) => {
     const states = context.rootGetters['fetch/getStates']
