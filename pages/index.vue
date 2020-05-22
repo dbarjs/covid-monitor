@@ -1,58 +1,51 @@
 <template>
-  <v-layout column justify-center>
+  <v-layout class="full-width" column justify-center>
     <header
-      class="d-flex flex-column justify-space-between pt-6 pb-2"
-      :style="{ height: verticalHeigth + 'px' }"
+      class="heigth-100 grey lighten-3 pt-6 pb-0 d-flex flex-column justify-space-between"
     >
       <Info v-if="brazil" :updated="brazil.updated"></Info>
       <v-container>
         <country-resume :country="brazil"></country-resume>
       </v-container>
     </header>
-    <states-resume></states-resume>
+    <v-layout class="grey lighten-1">
+      <v-container>
+        <city-search></city-search>
+        <selected-cities></selected-cities>
+      </v-container>
+    </v-layout>
+    <states-resume class="heigth-100 py-6 px-6"></states-resume>
   </v-layout>
 </template>
 
 <script>
+import CitySearch from '~/components/CitySearch.vue'
 import Info from '~/components/Info.vue'
 import CountryResume from '~/components/CountryResume.vue'
 import StatesResume from '~/components/StatesResume.vue'
+import SelectedCities from '~/components/SelectedCities'
 export default {
   components: {
+    CitySearch,
     CountryResume,
     Info,
-    StatesResume
-  },
-  data() {
-    return {
-      isMobile: false,
-      verticalHeigth: window.innerHeight
-    }
+    StatesResume,
+    SelectedCities
   },
   computed: {
     brazil() {
       return this.$store.getters['countries/getCountryById']('brazil')
     }
   },
-  beforeDestroy() {
-    if (typeof window !== 'undefined') {
-      window.removeEventListener('resize', this.onResize, { passive: true })
-    }
-  },
-  mounted() {
-    this.onResize()
-    window.addEventListener('resize', this.onResize, { passive: true })
-  },
   created() {
     this.$store.dispatch('countries/bindCountries')
-  },
-  methods: {
-    onResize() {
-      this.verticalHeigth = window.innerHeight
-      this.isMobile = window.innerWidth < 600
-    }
+    this.$store.dispatch('states/bindStates')
   }
 }
 </script>
 
-<style></style>
+<style>
+.heigth-100 {
+  min-height: 100vh;
+}
+</style>
