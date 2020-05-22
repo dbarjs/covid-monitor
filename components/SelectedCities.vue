@@ -1,16 +1,15 @@
 <template>
   <v-layout v-if="selectedCities">
     <v-container>
-      <v-row no-gutters>
+      <v-row>
         <v-col
           v-for="(cityId, index) in selectedCities"
-          :key="cityId"
+          :key="index"
           cols="12"
+          sm="6"
+          lg="4"
         >
-          <city-resume
-            :city-id="cityId"
-            :class="{ 'mb-3': index !== selectedCities.length - 1 }"
-          ></city-resume>
+          <city-resume :city-id="cityId"></city-resume>
         </v-col>
       </v-row>
     </v-container>
