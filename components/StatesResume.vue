@@ -88,7 +88,7 @@ export default {
 }
 .bar-fill {
   border-radius: inherit;
-  min-width: 60px;
+  min-width: 48px;
   max-width: 100%;
 }
 .state-total {
