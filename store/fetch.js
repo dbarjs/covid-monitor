@@ -66,17 +66,24 @@ export const getters = {
             country: entry.country,
             state: entry.state,
             deaths: 0,
-            cases: 0,
-            cities: {}
+            totalCases: 0,
+            newCases: 0,
+            newDeaths: 0,
+            cities: {},
+            lastDate: state.lastDate
           }
         }
         states[stateId].deaths += entry.newDeaths
-        states[stateId].cases += entry.newCases
+        states[stateId].totalCases += entry.newCases
         states[stateId].cities[cityId] = {
           _source: entry._source,
           city: entry.city,
           deaths: entry.deaths,
           totalCases: entry.totalCases
+        }
+        if (entry.date === states[stateId].lastDate) {
+          states[stateId].newCases += entry.newCases
+          states[stateId].newDeaths += entry.newDeaths
         }
       }
       return states
