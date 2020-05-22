@@ -1,9 +1,7 @@
 <template>
   <v-app>
     <v-content>
-      <v-container class="py-0">
-        <nuxt />
-      </v-container>
+      <nuxt />
     </v-content>
     <v-footer
       app
