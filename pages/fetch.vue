@@ -1,27 +1,29 @@
 <template>
   <v-layout column justify-center align-center>
     <v-btn @click="fetch">Fetch from Source</v-btn>
-    <div v-if="entries.length">
+    <div v-if="entries.length" class="log my-3">
       <p>Última data: {{ lastDate }}</p>
       <p>Casos: {{ totalCases }}</p>
       <p>Fetched {{ entries.length }} rows</p>
       <p>Fetched {{ Object.keys(cities).length }} new cities</p>
       <p>Keys: {{ keys }}</p>
-      <v-btn color="orange" @click="updateCities">
-        Save {{ Object.keys(cities).length }} Cities to Firestore
-      </v-btn>
-      <v-btn color="orange" @click="updateAllCities">
-        Save All Cities to Firestore
-      </v-btn>
-      <v-btn color="orange" @click="updateStates">
-        Save All States to Firestore
-      </v-btn>
-      <v-btn color="orange" @click="updateCountries">
-        Save Countries to Firestore
-      </v-btn>
       <p v-for="(city, index) in cities" :key="index">
         {{ city.ibgeID }} - {{ city.city }} - {{ city.newCases }}
       </p>
+    </div>
+    <div v-if="entries.length">
+      <v-btn color="orange" @click="updateCities">
+        Update {{ Object.keys(cities).length }} Cities
+      </v-btn>
+      <v-btn color="orange" @click="updateAllCities">
+        Update Cities
+      </v-btn>
+      <v-btn color="orange" @click="updateStates">
+        Update States
+      </v-btn>
+      <v-btn color="orange" @click="updateCountries">
+        Update Countries
+      </v-btn>
     </div>
   </v-layout>
 </template>
@@ -74,3 +76,17 @@ export default {
   }
 }
 </script>
+
+<style>
+.log {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 10px;
+  background-color: #000;
+  color: #fff;
+  padding: 1px 1rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 400px;
+  width: 100%;
+}
+</style>
