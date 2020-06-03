@@ -1,9 +1,9 @@
 <template>
-  <v-card v-if="city" flat>
+  <v-card v-if="city" flat link @click="openView">
     <v-card-title>{{ city.city }}</v-card-title>
-    <v-card-subtitle>
+    <v-card-subtitle class="font-mono">
       Casos: {{ city.totalCases | number }} <br />
-      Mortes: {{ city.deaths | number }}
+      Óbitos: {{ city.deaths | number }}
     </v-card-subtitle>
     <v-container>
       <v-sparkline
@@ -15,22 +15,31 @@
         padding="16"
       ></v-sparkline>
       <p class="caption text-center grey--text text--lighten-1">
-        Evolução de novos casos por dia
+        Evolução de novos casos (por dia)
       </p>
     </v-container>
     <v-card-actions>
       <v-spacer></v-spacer>
-      <v-btn icon color="red" @click="removeCity">
-        <v-icon>mdi-delete</v-icon>
+      <v-btn icon color="red accent-4" @click="removeCity">
+        <v-icon>mdi-delete-outline</v-icon>
       </v-btn>
     </v-card-actions>
+    <region-view
+      ref="cityView"
+      :title="city.city"
+      :entries="entries"
+    ></region-view>
   </v-card>
 </template>
 
 <script>
 import { DateTime } from 'luxon'
 import { citiesRef } from '~/firebase'
+import RegionView from '~/components/RegionView.vue'
 export default {
+  components: {
+    RegionView
+  },
   props: {
     cityId: {
       default: false,
@@ -75,8 +84,6 @@ export default {
     },
     newCases() {
       try {
-        // eslint-disable-next-line
-        if (this.city.city === 'Londrina/PR') console.log(this.entries)
         return this.city ? this.entries.map((entry) => entry.newCases) : []
       } catch {
         return [1]
@@ -101,10 +108,13 @@ export default {
       let current = firstDay
       const dates = []
       while (current <= today) {
-        dates.push(current.plus({ days: 1 }).toISODate())
+        dates.push(current.toISODate())
         current = current.plus({ days: 1 })
       }
       return dates
+    },
+    openView() {
+      this.$refs.cityView.show()
     }
   }
 }
