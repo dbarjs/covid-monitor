@@ -4,11 +4,11 @@
       <v-text-field
         v-model="cityQuery"
         solo
-        hide-details
+        hint="Apenas as cidades com casos confirmados aparecem na busca"
         label="Pesquise uma cidade"
         autocomplete="off"
       ></v-text-field>
-      <v-list v-if="cityQuery.length" color="transparent">
+      <v-list v-if="cityQuery.length" color="transparent" dense>
         <city-search-result-item
           v-for="(city, index) in queryResult"
           :key="index"
