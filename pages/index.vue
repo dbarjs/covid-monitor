@@ -1,5 +1,10 @@
 <template>
   <v-layout class="full-width" column justify-center>
+    <v-layout class="grey lighten-2">
+      <v-container>
+        <selected-cities></selected-cities>
+      </v-container>
+    </v-layout>
     <header
       class="heigth-100 grey lighten-3 pt-6 pb-0 d-flex flex-column justify-space-between"
     >
@@ -8,25 +13,17 @@
         <country-resume :country="brazil"></country-resume>
       </v-container>
     </header>
-    <v-layout class="grey lighten-2">
-      <v-container>
-        <city-search></city-search>
-        <selected-cities></selected-cities>
-      </v-container>
-    </v-layout>
     <states-resume class="heigth-100 py-6 px-6"></states-resume>
   </v-layout>
 </template>
 
 <script>
-import CitySearch from '~/components/CitySearch.vue'
 import Info from '~/components/Info.vue'
 import CountryResume from '~/components/CountryResume.vue'
 import StatesResume from '~/components/StatesResume.vue'
 import SelectedCities from '~/components/SelectedCities'
 export default {
   components: {
-    CitySearch,
     CountryResume,
     Info,
     StatesResume,
