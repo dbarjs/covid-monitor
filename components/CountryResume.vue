@@ -11,7 +11,7 @@
                 {{ country.totalCases | number }}
               </p>
               <p class="caption  text-center grey--text text--darken-1 mb-1">
-                Casos
+                Casos confirmados
               </p>
               <v-chip
                 label
@@ -32,7 +32,7 @@
                 {{ country.deaths | number }}
               </p>
               <p class="caption text-center grey--text text--darken-1 mb-1">
-                Óbitos
+                Óbitos confirmados
               </p>
               <v-chip
                 label
