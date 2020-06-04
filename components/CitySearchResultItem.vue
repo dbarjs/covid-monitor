@@ -1,7 +1,12 @@
 <template>
-  <v-list-item v-if="city" link color="grey" @click="selectCity(city.cityId)">
+  <v-list-item
+    v-if="city"
+    link
+    class="grey lighten-4"
+    @click="selectCity(city.cityId)"
+  >
     <v-list-item-title>
-      {{ city.name }}
+      <span class="font-weight-medium">{{ city.name }}</span>
     </v-list-item-title>
   </v-list-item>
 </template>
