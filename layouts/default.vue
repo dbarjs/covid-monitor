@@ -53,7 +53,8 @@ export default {
 
 <style>
 .v-application p.font-mono,
-.v-application span.font-mono {
+.v-application span.font-mono,
+.v-application div.font-mono {
   font-family: 'Roboto Mono', monospace !important;
   letter-spacing: -1px !important;
 }
